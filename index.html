@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Companion (Simple PWA)</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff"/>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2rem; }
+    button { padding: 1rem 2rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Cyber Companion</h1>
+  <p>Hello! I'm your friendly security assistant. 👋</p>
+  <button onclick="respond()">Ask a Question</button>
+  <p id="response"></p>
+
+  <script>
+    function respond() {
+      const replies = [
+        "Don't click on suspicious links!",
+        "Never share your password with anyone.",
+        "Always check the sender's email address."
+      ];
+      const rand = Math.floor(Math.random() * replies.length);
+      document.getElementById("response").textContent = replies[rand];
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('SW registration failed:', err));
+    }
+  </script>
+</body>
+</html>
