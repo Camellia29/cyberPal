@@ -29,6 +29,16 @@ const quizzes = [
   }
 ];
 
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-GB';
+    utter.rate = 1;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter);
+  }
+}
+
 function showSection(name) {
   const content = document.getElementById("content");
   const title = document.getElementById("page-title");
@@ -53,7 +63,8 @@ function showSection(name) {
       const btn = document.createElement("button");
       btn.textContent = q;
       btn.onclick = () => {
-        container.innerHTML = `<p><strong>Q:</strong> ${q}</p><p><strong>A:</strong> ${questions[q]}</p>`;
+        container.innerHTML = `<p><strong>Q:</strong> ${q}</p><p><strong>A:</strong> ${questions[q]}</p>
+        <button class="speak-btn" onclick="speak('${questions[q]}')">🔊 Hear it</button>`;
       };
       container.appendChild(btn);
     });
@@ -102,7 +113,9 @@ function showSection(name) {
       btn.textContent = choice;
       btn.onclick = () => {
         const correct = i === q.correct;
-        box.innerHTML += `<p class="feedback"><strong>${correct ? "✅ Correct!" : "❌ Not quite..."}</strong> ${q.explanation}</p>`;
+        const result = correct ? "✅ Correct!" : "❌ Not quite...";
+        const full = `${result} ${q.explanation}`;
+        box.innerHTML += `<p class="feedback">${full}</p><button class="speak-btn" onclick="speak('${full}')">🔊 Hear it</button>`;
       };
       box.appendChild(btn);
     });
