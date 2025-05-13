@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyber Companion (Simple PWA)</title>
-  <link rel="manifest" href="manifest.json">
+  <title>Cyber Companion</title>
+  <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#ffffff"/>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Cyber Companion</h1>
-  <p>Hello! I'm your friendly security assistant. 👋</p>
-  <button onclick="respond()">Ask a Question</button>
-  <div id="response"></div>
+  <header>
+    <h1 id="page-title">Cyber Companion</h1>
+  </header>
+
+  <main id="content"></main>
+
+  <nav class="bottom-nav">
+    <button onclick="showSection('home')">🏠<br>Home</button>
+    <button onclick="showSection('chat')">💬<br>Companion</button>
+    <button onclick="showSection('scenarios')">🧠<br>Scenarios</button>
+    <button onclick="showSection('report')">🚨<br>Reports</button>
+    <button onclick="showSection('quiz')">🧪<br>Quiz</button>
+  </nav>
 
   <script src="main.js"></script>
 </body>
