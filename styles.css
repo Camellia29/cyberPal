@@ -1,70 +1,233 @@
+
+:root {
+  --font-size: 18px;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: var(--font-size);
   margin: 0;
-  background-color: #f2f2f2;
-  color: #000;
+  background: linear-gradient(to top, #eafcff, #e1e5ff);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  color: #333;
 }
+
+/* Header */
 header {
-  background: #ffffff;
-  padding: 1rem;
-  border-bottom: 1px solid #ccc;
+  color: black;
   text-align: center;
-}
-#page-title {
-  margin: 0;
+  padding: 1.5rem 1rem;
   font-size: 1.5rem;
 }
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #000e38;
+}
+
+header h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+/* Main Content */
 main {
   padding: 1rem;
 }
-button {
-  display: block;
-  width: 100%;
-  max-width: 320px;
-  margin: 1rem auto;
-  padding: 1.25rem;
+
+/* Welcome Section */
+.welcome {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.welcome h1 {
+  font-size: 2rem;
+  color: #001f54;
+  margin-bottom: 0.25rem;
+}
+
+.welcome p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* Card Base Style */
+.card {
+  background: white;
+  border-radius: 12%;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 92%;
+}
+
+.card .icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.card .text p {
+  margin: 0.25rem 0 0;
+  color: #333;
+}
+
+.card button {
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  background: #e0e0e0;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.card button:hover {
+  background: linear-gradient(to right, #89f7fe, #66a6ff);
+}
+
+/* Color Variants */
+.card-purple { background-color: #e6ddfb; }
+.card-orange { background-color: #ffe0c3; }
+.card-blue   { background-color: #c3f0ff; }
+.card-green  { background-color: #d5fce0; }
+.card-light  { background-color: #e8e9f8; }
+
+/* hCard Styling */
+.hCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1.25rem auto;
+  max-width: 92%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.hCard .icon {
+  font-size: 2.5rem;
+  margin-right: 1.2rem;
+}
+
+.hCard .text strong {
+  font-size: 1.3rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.hCard .text p {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.hCard-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.hCard-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.hCard-desc {
+  font-size: 1rem;
+  color: #444;
+}
+
+.hCard-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hCard-button {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+}
+
+.hCard-arrow {
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+.tCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1.25rem auto;
+  max-width: 92%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Input */
+input[type="text"] {
+  width: 91%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  text-align: center;
 }
-button:hover {
-  background: #d5d5d5;
-}
-.bottom-nav {
+
+/* Tab Bar */
+.tab-bar {
+  display: flex;
+  justify-content: space-around;
+  background: #ffffff;
+  padding: 0.75rem 0.5rem;
+  border-radius: 35px 35px 0 0;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: #fff;
-  border-top: 1px solid #ccc;
-  display: flex;
-  justify-content: space-around;
+  max-width: 500px;
+  left: 50%;
+  transform: translateX(-50%);
 }
-.bottom-nav button {
-  border-radius: 0;
-  border: none;
-  font-size: 0.85rem;
-  padding: 0.5rem;
+
+.tab-bar button {
   background: none;
+  border: none;
+  font-size: 0.9rem;
+  text-align: center;
+  flex-grow: 1;
+  color: #444;
 }
-textarea {
-  width: 90%;
-  max-width: 480px;
-  padding: 1rem;
-  font-size: 1rem;
+
+.tab-bar button.active {
+  color: #0a84ff;
+}
+
+.tab-bar span {
   display: block;
-  margin: 1rem auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  font-size: 1.2rem;
 }
-.feedback, .card {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem auto;
-  max-width: 480px;
-  text-align: left;
+
+.tab-bar img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+/* Image icon class */
+.icon {
+  width: 48px;
+  height: 48px;
+  margin-right: 1rem;
+  object-fit: contain;
 }

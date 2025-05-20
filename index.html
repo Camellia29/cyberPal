@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cyber Companion</title>
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#ffffff"/>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="manifest" href="manifest.json"/>
 </head>
 <body>
-  <header>
-    <h1 id="page-title">Cyber Companion</h1>
-  </header>
-
+  <header><h1 id="title">Cyber Companion</h1></header>
   <main id="content"></main>
-
-  <nav class="bottom-nav">
-    <button onclick="showSection('home')">🏠<br>Home</button>
-    <button onclick="showSection('chat')">💬<br>Companion</button>
-    <button onclick="showSection('scenarios')">🧠<br>Scenarios</button>
-    <button onclick="showSection('report')">🚨<br>Reports</button>
-    <button onclick="showSection('quiz')">🧪<br>Quiz</button>
+  <nav class="tab-bar">
+    <button class="active" onclick="setActiveTab(this); loadView('home')" id="tab-home">
+    <img src="icons/home.png" alt="Home"/>
+    Home
+  </button>
+  <button onclick="setActiveTab(this); loadView('quiz')" id="tab-quiz">
+    <img src="icons/quiz.png" alt="Quiz"/>
+    Quiz
+  </button>
+  <button onclick="setActiveTab(this); loadView('recipe')" id="tab-recipe">
+    <img src="icons/list.png" alt="Recipe"/>
+    Recipes
+  </button>
+  <button onclick="setActiveTab(this); loadView('ask')" id="tab-ask">
+    <img src="icons/message.png" alt="Ask"/>  
+    Ask
+  </button>
+  <button onclick="setActiveTab(this); loadView('reminder')" id="tab-reminder">
+    <img src="icons/tips.png" alt="Reminder"/>
+    Tips
+  </button>
+  <button onclick="setActiveTab(this); loadView('settings')" id="tab-settings">
+    <img src="icons/settings.png" alt="Settings"/>
+    Settings
+  </button>  
   </nav>
-
   <script src="main.js"></script>
 </body>
 </html>
