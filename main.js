@@ -1,7 +1,6 @@
 
 function loadView(view) {
   const content = document.getElementById('content');
-  // document.getElementById('title').textContent = '';
 
   if (view === 'home') {
     content.innerHTML = `
