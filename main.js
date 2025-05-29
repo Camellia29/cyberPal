@@ -12,7 +12,7 @@ function loadView(view) {
       ${hCard("📘", "Recipe Card", "Learn online safety steps", "loadView('recipe')", "#ffe0c7")}
       ${hCard("🤖", "Ask a Friend", "Chat with a virtual assistant", "loadView('ask')", "#c7f0ff")}
       ${hCard("📞", "Emergency Contact", "Add someone to call in urgent situations", "loadView('emergency')", "#d4f7ec")}
-      ${hCard("💡", "Reminder", "Don’t click links in emails from strangers", "loadView('reminder')", "#e0e0f0")}
+      ${hCard("💡", "Reminder", "Don't click links in emails from strangers", "loadView('reminder')", "#e0e0f0")}
     `;
   } else if (view === 'quiz') {
     content.innerHTML = `
@@ -32,7 +32,7 @@ function loadView(view) {
       </header>
       <div class="card">
         <h3>How to stay safe online</h3>
-        <p>1. Use strong passwords<br>2. Don’t share personal info<br>3. Ask someone if unsure</p>
+        <p>1. Use strong passwords<br>2. Don't share personal info<br>3. Ask someone if unsure</p>
       </div>`;
   } else if (view === 'ask') {
     content.innerHTML = `
@@ -51,7 +51,7 @@ function loadView(view) {
       <h1>Today's Tip</h1>
       </header>
       <div class="tCard">
-        <p>💡 Don’t click on links from unknown emails.</p>
+        <p>💡 Don't click on links from unknown emails.</p>
       </div>`;
   } else if (view === 'settings') {
     content.innerHTML = `
@@ -60,9 +60,10 @@ function loadView(view) {
       </header>
       <div class="card">
         <p>Adjust text size:</p>
-        <button onclick="document.body.style.fontSize='16px'">Small</button>
-        <button onclick="document.body.style.fontSize='18px'">Medium</button>
-        <button onclick="document.body.style.fontSize='22px'">Large</button>
+        <button onclick="setFontSize('font-small')">Small</button>
+        <button onclick="setFontSize('font-medium')">Medium</button>
+        <button onclick="setFontSize('font-large')">Large</button>
+        <p>Other settings:</p>
         <button onclick="loadView('emergency')">Emergency Contact</button>
       </div>`;
   } else if (view === 'emergency') {
@@ -124,3 +125,8 @@ function setActiveTab(button) {
 }
 
 window.onload = () => loadView('home');
+
+function setFontSize(className) {
+  document.documentElement.classList.remove('font-small', 'font-medium', 'font-large');
+  document.documentElement.classList.add(className);
+}

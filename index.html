@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" class="font-medium"> 
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#e1e5ff">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>Cyber Companion</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <link rel="manifest" href="manifest.json"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#e1e5ff" name="theme-color"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<title>Cyber Companion</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="manifest.json" rel="manifest"/>
 </head>
 <body>
-  <main id="content"></main>
-  <nav class="tab-bar">
-    <button class="active" onclick="setActiveTab(this); loadView('home')" id="tab-home">
-    <img src="icons/home.png" alt="Home"/>
+<main id="content"></main>
+<nav class="tab-bar">
+<button class="active" id="tab-home" onclick="setActiveTab(this); loadView('home')">
+<img alt="Home" src="icons/home.png"/>
     Home
   </button>
-  <button onclick="setActiveTab(this); loadView('quiz')" id="tab-quiz">
-    <img src="icons/quiz.png" alt="Quiz"/>
+<button id="tab-quiz" onclick="setActiveTab(this); loadView('quiz')">
+<img alt="Quiz" src="icons/quiz.png"/>
     Quiz
   </button>
-  <button onclick="setActiveTab(this); loadView('recipe')" id="tab-recipe">
-    <img src="icons/list.png" alt="Recipe"/>
+<button id="tab-recipe" onclick="setActiveTab(this); loadView('recipe')">
+<img alt="Recipe" src="icons/list.png"/>
     Recipes
   </button>
-  <button onclick="setActiveTab(this); loadView('ask')" id="tab-ask">
-    <img src="icons/message.png" alt="Ask"/>  
+<button id="tab-ask" onclick="setActiveTab(this); loadView('ask')">
+<img alt="Ask" src="icons/message.png"/>  
     Ask
   </button>
-  <button onclick="setActiveTab(this); loadView('reminder')" id="tab-reminder">
-    <img src="icons/tips.png" alt="Reminder"/>
+<button id="tab-reminder" onclick="setActiveTab(this); loadView('reminder')">
+<img alt="Reminder" src="icons/tips.png"/>
     Tips
   </button>
-  <button onclick="setActiveTab(this); loadView('settings')" id="tab-settings">
-    <img src="icons/settings.png" alt="Settings"/>
+<button id="tab-settings" onclick="setActiveTab(this); loadView('settings')">
+<img alt="Settings" src="icons/settings.png"/>
     Settings
-  </button>  
-  </nav>
-  <script src="main.js"></script>
+  </button>
+</nav>
+<script src="main.js"></script>
 </body>
 </html>
