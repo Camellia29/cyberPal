@@ -9,10 +9,10 @@ function loadView(view) {
       <h2>How can I assist you today?</h2>
       </header>
       ${hCard("🧠", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#dcd4f7")}
-      ${hCard("📘", "Recipe Card", "Learn online safety steps", "loadView('recipe')", "#ffe0c7")}
+      ${hCard("📜", "Recipe Card", "Learn online safety steps", "loadView('recipe')", "#ffe0c7")}
       ${hCard("🤖", "Ask a Friend", "Chat with a virtual assistant", "loadView('ask')", "#c7f0ff")}
       ${hCard("📞", "Emergency Contact", "Add someone to call in urgent situations", "loadView('emergency')", "#d4f7ec")}
-      ${hCard("💡", "Reminder", "Don’t click links in emails from strangers", "loadView('reminder')", "#e0e0f0")}
+      ${hCard("💡", "Reminder", "Don't click links in emails from strangers", "loadView('reminder')", "#e0e0f0")}
     `;
   } else if (view === 'quiz') {
     content.innerHTML = `
@@ -23,7 +23,7 @@ function loadView(view) {
         <p>You receive an email from your 'bank' asking to confirm your account. What do you do?</p>
         <button onclick="feedback(true)">Call the bank directly</button>
         <button onclick="feedback(false)">Click the link in the email</button>
-        <div id="quiz-feedback"></div>
+        <div id="quiz-feedback">
       </div>`;
   } else if (view === 'recipe') {
     content.innerHTML = `
@@ -32,7 +32,8 @@ function loadView(view) {
       </header>
       <div class="card">
         <h3>How to stay safe online</h3>
-        <p>1. Use strong passwords<br>2. Don’t share personal info<br>3. Ask someone if unsure</p>
+        <p>1. Use strong passwords<br>2. Don't share personal info<br>3. Ask someone if unsure</p>
+        <button class="speak-btn" onclick="speakText(this)">🔊 Speak</button>
       </div>`;
   } else if (view === 'ask') {
     content.innerHTML = `
@@ -50,8 +51,9 @@ function loadView(view) {
       <header>
       <h1>Today's Tip</h1>
       </header>
-      <div class="tCard">
-        <p>💡 Don’t click on links from unknown emails.</p>
+      <div class="card">
+        <p>💡 Don't click on links from unknown emails.</p> 
+        <p><button class="speak-btn" onclick="speakText(this)">🔊 Speak</button></p>
       </div>`;
   } else if (view === 'settings') {
     content.innerHTML = `
@@ -60,10 +62,15 @@ function loadView(view) {
       </header>
       <div class="card">
         <p>Adjust text size:</p>
-        <button onclick="document.body.style.fontSize='16px'">Small</button>
-        <button onclick="document.body.style.fontSize='18px'">Medium</button>
-        <button onclick="document.body.style.fontSize='22px'">Large</button>
+        <button onclick="setFontSize('font-small')">Small</button>
+        <button onclick="setFontSize('font-medium')">Medium</button>
+        <button onclick="setFontSize('font-large')">Large</button>
+        <p>Other settings:</p>
         <button onclick="loadView('emergency')">Emergency Contact</button>
+        <p>
+        <input type="checkbox" id="ttsToggle" onchange="toggleTTS(this.checked)">
+        Enable Voice Guidance
+        </p>
       </div>`;
   } else if (view === 'emergency') {
     const stored = JSON.parse(localStorage.getItem('emergencyContact') || '{}');
@@ -124,3 +131,49 @@ function setActiveTab(button) {
 }
 
 window.onload = () => loadView('home');
+
+function setFontSize(className) {
+  document.documentElement.classList.remove('font-small', 'font-medium', 'font-large');
+  document.documentElement.classList.add(className);
+}
+
+
+let currentUtterance = null;
+
+function speakText(button) {
+  if (currentUtterance) {
+    speechSynthesis.cancel();
+  }
+  const prev = button.previousElementSibling;
+  const text = prev ? prev.textContent : "";
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.lang = "en-US";
+  speechSynthesis.speak(currentUtterance);
+}
+
+function stopSpeaking() {
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+  }
+}
+
+// buttons tts
+
+let ttsEnabled = false;
+
+function toggleTTS(state) {
+  ttsEnabled = state;
+}
+
+document.addEventListener("click", function (e) {
+  if (!ttsEnabled) return;
+  if (e.target.tagName === "BUTTON") {
+    const text = e.target.textContent.trim();
+    if (text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      speechSynthesis.speak(utterance);
+    }
+  }
+});
+
