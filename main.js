@@ -32,8 +32,7 @@ function loadView(view) {
       </header>
       <div class="card">
         <h3>How to stay safe online</h3>
-        <p>1. Use strong passwords<br>2. Don't share personal info<br>3. Ask someone if unsure</p>
-        <button class="speak-btn" onclick="speakText(this)">🔊 Speak</button>
+        <p>1. Use strong passwords<br>2. Don’t share personal info<br>3. Ask someone if unsure</p>
       </div>`;
   } else if (view === 'ask') {
     content.innerHTML = `
@@ -51,9 +50,8 @@ function loadView(view) {
       <header>
       <h1>Today's Tip</h1>
       </header>
-      <div class="card">
-        <p>💡 Don't click on links from unknown emails.</p> 
-        <p><button class="speak-btn" onclick="speakText(this)">🔊 Speak</button></p>
+      <div class="tCard">
+        <p>💡 Don’t click on links from unknown emails.</p>
       </div>`;
   } else if (view === 'settings') {
     content.innerHTML = `
@@ -177,3 +175,8 @@ document.addEventListener("click", function (e) {
   }
 });
 
+
+function setFontSize(className) {
+  document.documentElement.classList.remove('font-small', 'font-medium', 'font-large');
+  document.documentElement.classList.add(className);
+}
