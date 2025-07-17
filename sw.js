@@ -1,6 +1,6 @@
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open('cyber-companion-v1').then(cache => {
+    caches.open('cyber-guide-v1').then(cache => {
       return cache.addAll([
         './index.html',
         './styles.css',

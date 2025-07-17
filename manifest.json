@@ -1,6 +1,6 @@
 {
-  "name": "Cyber Companion",
-  "short_name": "CyberCompanion",
+  "name": "Cyber Guide",
+  "short_name": "CyberGuide",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#eafcff",
