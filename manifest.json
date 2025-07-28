@@ -1,6 +1,6 @@
 {
-  "name": "Cyber Guide",
-  "short_name": "CyberGuide",
+  "name": "CyberPal",
+  "short_name": "CyberPal",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#eafcff",

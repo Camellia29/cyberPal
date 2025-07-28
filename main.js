@@ -147,7 +147,7 @@ function speakText(button) {
   const prev = button.previousElementSibling;
   const text = prev ? prev.textContent : "";
   currentUtterance = new SpeechSynthesisUtterance(text);
-  currentUtterance.lang = "en-US";
+  currentUtterance.lang = "en-UK";
   speechSynthesis.speak(currentUtterance);
 }
 
