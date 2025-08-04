@@ -1,6 +1,6 @@
 
 :root {
-  --font-size: 18px;
+  --font-size: 20px;
   --font-scale: 1; 
 }
 
@@ -189,7 +189,7 @@ input[type="text"] {
 .tab-bar button {
   background: none;
   border: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
   text-align: center;
   flex-grow: 1;
   color: #444;
@@ -205,8 +205,8 @@ input[type="text"] {
 }
 
 .tab-bar img {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   margin-bottom: 4px;
 }
 

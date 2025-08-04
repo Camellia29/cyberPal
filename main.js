@@ -53,23 +53,18 @@ function loadView(view) {
       <header>
       <h1>Welcome back!</h1>
       <h2>How can I assist you today?</h2>
-      <div class='fontsize' id="font-size-bar" style="text-align:center; margin: 10px 0;">
-      <button onclick="setFontSize('font-small')">A</button>
-      <button onclick="setFontSize('font-medium')">A+</button>
-      <button onclick="setFontSize('font-large')">A++</button>
-      </div>
       </header>
-      ${hCard("🧠", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#dcd4f7")}
-      ${hCard("📜", "Recipe Card", "Learn online safety steps", "loadView('recipe')", "#ffe0c7")}
-      ${hCard("🤖", "Ask a Friend", "Chat with a virtual assistant", "loadView('ask')", "#c7f0ff")}
+      ${hCard("🔠", "Font Size", "Increase font size to your liking", "loadView('fontSize')", "#dcd4f7")}
+      ${hCard("🧠", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#ffe0c7")}
+      ${hCard("💬", "General Advice", "Learn online safety steps", "loadView('advice')", "#c7f0ff")}
       ${hCard("📞", "Trusted Contact", "Add someone you trust to call in urgent situations", "loadView('contact')", "#d4f7ec")}
-      ${hCard("💡", "Reminder", "Don't click links in emails from strangers", "loadView('reminder')", "#e0e0f0")}
+      ${hCard("💡", "Daily Tips", "Read today's tip", "loadView('reminder')", "#e0e0f0")}
     `;
   } else if (view === 'quiz') {
 
     renderQuizScenario(currentScenarioIndex);
 
-  } else if (view === 'recipe') {
+  } else if (view === 'advice') {
     content.innerHTML = `
       <header>
       <h1>Safety Tips</h1>
@@ -110,24 +105,7 @@ function loadView(view) {
             If something feels off or too good to be true, <strong>take a moment</strong> to think it through. Scammers often create a sense of urgency.
           </div>
         </div>`;
-          //   <div class="tip-example">
-          //   <strong>Example:</strong><br>
-          //   You get a call saying your internet will be cut off unless you pay right now. <br>
-          //   <b> what should you do?</b><br>
-          //   Hang up nd check with your real provider using their number from your bill or website.
-          // </div>
         bindTipButtons();
-  } else if (view === 'ask') {
-    content.innerHTML = `
-      <header>
-      <h1>Ask a Friend</h1>
-      </header>
-      <div class="card">
-        <p>Type your question:</p>
-        <input type="text" id="question" placeholder="e.g., What is phishing?"/>
-        <button onclick="askFriend()">Ask</button>
-        <p id="answer"></p>
-      </div>`;
   } else if (view === 'reminder') {
     content.innerHTML = `
       <header>
@@ -137,16 +115,16 @@ function loadView(view) {
         <p>💡</p><p> Don't click on links from unknown emails.</p> 
         <button class="speak-btn" onclick="speakText(this)">🔊 Read Aloud</button>
       </div>`;
-  } else if (view === 'settings') {
+  } else if (view === 'fontSize') {
     content.innerHTML = `
       <header>
       <h1>Settings</h1>
       </header>
       <div class="card">
         <p>Adjust text size:</p>
-        <button onclick="setFontSize('font-small')">Small</button>
-        <button onclick="setFontSize('font-medium')">Medium</button>
-        <button onclick="setFontSize('font-large')">Large</button>
+        <button onclick="setFontSize('font-small')">A</button>
+        <button onclick="setFontSize('font-medium')">A+</button>
+        <button onclick="setFontSize('font-large')">A++</button>
         <p>Other settings:</p>
         <button onclick="loadView('contact')">Trusted Contact</button>
       </div>`;
