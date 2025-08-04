@@ -86,7 +86,7 @@ function loadView(view) {
             <span class="tip-icon">🙋‍♀️</span> Ask for Help
           </button>
           <div class="tip-body" id="tip2-body" hidden>
-            Not sure? Show it to a friend or family member before doing anything.
+            Not sure? Show it to a friend or family member <strong>before</strong> doing anything.
           </div>
 
           <button class="tip-button" aria-expanded="false" aria-controls="tip3-body" id="tip3-btn">
@@ -100,14 +100,14 @@ function loadView(view) {
             <span class="tip-icon">📞</span> Verify Official Contacts
           </button>
           <div class="tip-body" id="tip4-body" hidden>
-            Always use official phone numbers or websites to contact your bank or service provider to check suspicious messages.
+            <strong>Always</strong> use official phone numbers or websites to contact your bank or service provider to check suspicious messages.
           </div>
 
           <button class="tip-button" aria-expanded="false" aria-controls="tip5-body" id="tip5-btn">
             <span class="tip-icon">🤔</span> Trust Your Instincts
           </button>
           <div class="tip-body" id="tip5-body" hidden>
-            If something feels off or too good to be true, take a moment to think it through. Scammers often create a sense of urgency.
+            If something feels off or too good to be true, <strong>take a moment</strong> to think it through. Scammers often create a sense of urgency.
           </div>
         </div>`;
           //   <div class="tip-example">
