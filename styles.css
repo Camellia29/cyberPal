@@ -60,6 +60,18 @@ main {
   color: black;
 }
 
+.fontsize button {
+  background:#a1c4fd;
+  font-size: calc(1rem * var(--font-scale)); 
+  margin-top: 0.5rem;
+  padding: 0.75em 1.25em;
+  border-radius: 8px;
+  border: none;
+  min-width: 110px;
+  min-height: 44px;
+  cursor: pointer;
+}
+
 .card button {
   background: linear-gradient(to right, #a1c4fd, #c2e9fb);
   border: none;
@@ -217,8 +229,4 @@ input[type="text"] {
   --font-scale: 1.5;
 }
 
-/* Checkbox */
-input[type="checkbox"] {
-  width: 2rem;
-  height: 2rem;
-}
+
