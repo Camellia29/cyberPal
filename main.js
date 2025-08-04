@@ -9,31 +9,18 @@ const quizScenarios = [
     ],
     explanation: "Banks never ask for personal info via email. Calling them directly ensures your information stays safe."
   },
-   {
-    id: 2,
-    question: `Email:<br>
-    <em>Dear Customer,<br>
-    Due to unusual activity on your account, we require you to re-verify your details immediately or your access will be suspended.<br>
-    Please click <a href="#">here</a> to restore access.<br>
-    Thank you, Bank Security Team</em>`,
-    options: [
-      { text: "It's a scam", correct: true },
-      { text: "It's a genuine message", correct: false }
-    ],
-    explanation: "This is a classic phishing email: urgent language, generic greeting, and a link asking for your details. Always contact your bank directly using official channels."
+  {
+  id: 2,
+  question: `<img src="scam_examples/amazon.png" alt="Screenshot of amazon scam email" style="max-width:100%;height:auto;">
+  <br> Is this message a scam or genuine?`,
+  options: [
+    { text: "It's a scam", correct: true },
+    { text: "It's a genuine message", correct: false }
+  ],
+  explanation: "Always check the sender's address and never click on links in suspicious emails. Plus, it is requesting an urgent."
   },
   {
     id: 3,
-    question: `Text message:<br>
-    <em>Royal Mail: Your package is awaiting delivery. Pay £1.99 via https://royalmail-track.xyz to avoid return.</em>`,
-    options: [
-      { text: "It's a scam", correct: true },
-      { text: "It's a genuine message", correct: false }
-    ],
-    explanation: "Delivery scams use fake links and press for quick payment. Never enter payment details via links in unexpected texts."
-  },
-  {
-    id: 4,
     question: "You get a phone call saying you won a prize but must pay a fee first. What is your best response?",
     options: [
       { text: "Pay the fee to claim the prize", correct: false },
@@ -43,19 +30,7 @@ const quizScenarios = [
     explanation: "Legitimate prizes don't require payment upfront. Scammers use urgency to trick you. Always be cautious."
   },
   {
-    id: 5,
-    question: `Email:<br>
-    <em>Dear Ms. Smith, <br>
-    Your bank statement for July is now available. Log into your account as usual to view and download it. <br>
-    Thank you, YourBank PLC</em>`,
-    options: [
-      { text: "It's a scam", correct: false },
-      { text: "It's a genuine message", correct: true }
-    ],
-    explanation: "This message is likely genuine: it addresses you by name, doesn't ask for login details or include urgent requests, and does not include any suspicious links."
-  },
-  {
-  id: 6,
+  id: 4,
   question: `<img src="scam_examples/HSBC_scam.png" alt="Screenshot of HSBC scam message" style="max-width:100%;height:auto;">
   <br> Is this message a scam or genuine?`,
   options: [
@@ -63,8 +38,7 @@ const quizScenarios = [
     { text: "It's a genuine message", correct: false }
   ],
   explanation: "The link and urgent request to visit it are red flags. Contact your bank."
-}
-
+},
 ];
 
 let currentScenarioIndex = 0;
@@ -88,7 +62,7 @@ function loadView(view) {
       ${hCard("🧠", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#dcd4f7")}
       ${hCard("📜", "Recipe Card", "Learn online safety steps", "loadView('recipe')", "#ffe0c7")}
       ${hCard("🤖", "Ask a Friend", "Chat with a virtual assistant", "loadView('ask')", "#c7f0ff")}
-      ${hCard("📞", "Emergency Contact", "Add someone to call in urgent situations", "loadView('emergency')", "#d4f7ec")}
+      ${hCard("📞", "Trusted Contact", "Add someone you trust to call in urgent situations", "loadView('contact')", "#d4f7ec")}
       ${hCard("💡", "Reminder", "Don't click links in emails from strangers", "loadView('reminder')", "#e0e0f0")}
     `;
   } else if (view === 'quiz') {
@@ -100,11 +74,49 @@ function loadView(view) {
       <header>
       <h1>Safety Tips</h1>
       </header>
-      <div class="card">
-        <h3>How to stay safe online</h3>
-        <p>1. Use strong passwords<br>2. Don't share personal info<br>3. Ask someone if unsure</p>
-        <button class="speak-btn" onclick="speakText(this)">🔊 Read Aloud</button>
-      </div>`;
+        <div class="tips-container">
+          <button class="tip-button" aria-expanded="false" aria-controls="tip1-body" id="tip1-btn">
+            <span class="tip-icon">🛑</span> Stop and Think
+          </button>
+          <div class="tip-body" id="tip1-body" hidden>
+            If you get a message or call asking for urgent action: <strong>pause</strong>. Scammers want you to rush.
+          </div>
+
+          <button class="tip-button" aria-expanded="false" aria-controls="tip2-body" id="tip2-btn">
+            <span class="tip-icon">🙋‍♀️</span> Ask for Help
+          </button>
+          <div class="tip-body" id="tip2-body" hidden>
+            Not sure? Show it to a friend or family member before doing anything.
+          </div>
+
+          <button class="tip-button" aria-expanded="false" aria-controls="tip3-body" id="tip3-btn">
+            <span class="tip-icon">🔒</span> Keep Details Private
+          </button>
+          <div class="tip-body" id="tip3-body" hidden>
+            Real banks <strong>never</strong> ask for your password or PIN by phone or email.
+          </div>
+          
+          <button class="tip-button" aria-expanded="false" aria-controls="tip4-body" id="tip4-btn">
+            <span class="tip-icon">📞</span> Verify Official Contacts
+          </button>
+          <div class="tip-body" id="tip4-body" hidden>
+            Always use official phone numbers or websites to contact your bank or service provider to check suspicious messages.
+          </div>
+
+          <button class="tip-button" aria-expanded="false" aria-controls="tip5-body" id="tip5-btn">
+            <span class="tip-icon">🤔</span> Trust Your Instincts
+          </button>
+          <div class="tip-body" id="tip5-body" hidden>
+            If something feels off or too good to be true, take a moment to think it through. Scammers often create a sense of urgency.
+          </div>
+        </div>`;
+          //   <div class="tip-example">
+          //   <strong>Example:</strong><br>
+          //   You get a call saying your internet will be cut off unless you pay right now. <br>
+          //   <b> what should you do?</b><br>
+          //   Hang up nd check with your real provider using their number from your bill or website.
+          // </div>
+        bindTipButtons();
   } else if (view === 'ask') {
     content.innerHTML = `
       <header>
@@ -136,21 +148,21 @@ function loadView(view) {
         <button onclick="setFontSize('font-medium')">Medium</button>
         <button onclick="setFontSize('font-large')">Large</button>
         <p>Other settings:</p>
-        <button onclick="loadView('emergency')">Emergency Contact</button>
+        <button onclick="loadView('contact')">Trusted Contact</button>
       </div>`;
-  } else if (view === 'emergency') {
-    const stored = JSON.parse(localStorage.getItem('emergencyContact') || '{}');
+  } else if (view === 'contact') {
+    const stored = JSON.parse(localStorage.getItem('trustedContact') || '{}');
     content.innerHTML = `
       <header>
-      <h1>Emergency Contact</h1>
+      <h1>Trusted Contact</h1>
       </header>
       <div class="card">
-        <p>Enter your emergency contact details below:</p>
+        <p>Enter your trusted contact details below:</p>
         <label>Name:</label>
-        <input type="text" id="emergencyName" value="${stored.name || ''}" placeholder="e.g., Jane Doe">
+        <input type="text" id="trustedName" value="${stored.name || ''}" placeholder="e.g., Jane Doe">
         <label>Phone:</label>
-        <input type="text" id="emergencyPhone" value="${stored.phone || ''}" placeholder="e.g., 555-123-4567">
-        <button onclick="saveEmergencyContact()">Save</button>
+        <input type="text" id="trustedPhone" value="${stored.phone || ''}" placeholder="e.g., 555-123-4567">
+        <button onclick="saveTrustedContact()">Save</button>
         <p id="savedMsg"></p>
       </div>`;
   }
@@ -194,10 +206,10 @@ function askFriend() {
   }
 }
 
-function saveEmergencyContact() {
-  const name = document.getElementById("emergencyName").value;
-  const phone = document.getElementById("emergencyPhone").value;
-  localStorage.setItem("emergencyContact", JSON.stringify({ name, phone }));
+function saveTrustedContact() {
+  const name = document.getElementById("trustedName").value;
+  const phone = document.getElementById("trustedPhone").value;
+  localStorage.setItem("trustedContact", JSON.stringify({ name, phone }));
   document.getElementById("savedMsg").textContent = "✅ Saved successfully!";
 }
 
@@ -308,3 +320,30 @@ function nextScenario() {
     renderQuizScenario(currentScenarioIndex);
   }
 }
+
+// Recipe card functions
+function bindTipButtons() {
+  const buttons = document.querySelectorAll('.tip-button');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+
+      // Close all tips
+      buttons.forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+        const body = document.getElementById(btn.getAttribute('aria-controls'));
+        if (body) body.hidden = true;
+      });
+
+      // Open the clicked tip if it was closed
+      if (!expanded) {
+        button.setAttribute('aria-expanded', 'true');
+        const tipBody = document.getElementById(button.getAttribute('aria-controls'));
+        if (tipBody) tipBody.hidden = false;
+      }
+    });
+  });
+}
+
+
