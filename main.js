@@ -71,35 +71,35 @@ function loadView(view) {
       </header>
         <div class="tips-container">
           <button class="tip-button" aria-expanded="false" aria-controls="tip1-body" id="tip1-btn">
-            <span class="tip-icon">🛑</span> Stop and Think
+            <span class="tip-icon">🛑</span> Stop and Think <div class="hCard-arrow">›</div>
           </button>
           <div class="tip-body" id="tip1-body" hidden>
             If you get a message or call asking for urgent action: <strong>pause</strong>. Scammers want you to rush.
           </div>
 
           <button class="tip-button" aria-expanded="false" aria-controls="tip2-body" id="tip2-btn">
-            <span class="tip-icon">🙋‍♀️</span> Ask for Help
+            <span class="tip-icon">🙋‍♀️</span> Ask for Help <div class="hCard-arrow">›</div>
           </button>
           <div class="tip-body" id="tip2-body" hidden>
             Not sure? Show it to a friend or family member <strong>before</strong> doing anything.
           </div>
 
           <button class="tip-button" aria-expanded="false" aria-controls="tip3-body" id="tip3-btn">
-            <span class="tip-icon">🔒</span> Keep Details Private
+            <span class="tip-icon">🔒</span> Keep Details Private <div class="hCard-arrow">›</div>
           </button>
           <div class="tip-body" id="tip3-body" hidden>
             Real banks <strong>never</strong> ask for your password or PIN by phone or email.
           </div>
           
           <button class="tip-button" aria-expanded="false" aria-controls="tip4-body" id="tip4-btn">
-            <span class="tip-icon">📞</span> Verify Official Contacts
+            <span class="tip-icon">📞</span> Verify Official Contacts <div class="hCard-arrow">›</div>
           </button>
           <div class="tip-body" id="tip4-body" hidden>
             <strong>Always</strong> use official phone numbers or websites to contact your bank or service provider to check suspicious messages.
           </div>
 
           <button class="tip-button" aria-expanded="false" aria-controls="tip5-body" id="tip5-btn">
-            <span class="tip-icon">🤔</span> Trust Your Instincts
+            <span class="tip-icon">🤔</span> Trust Your Instincts <div class="hCard-arrow">›</div>
           </button>
           <div class="tip-body" id="tip5-body" hidden>
             If something feels off or too good to be true, <strong>take a moment</strong> to think it through. Scammers often create a sense of urgency.
@@ -260,7 +260,6 @@ function renderQuizScenario(index) {
     <p>No scenario found.</p>`;
     return;
   }
-  
 
   content.innerHTML = getBackButtonHtml() + `
     <header><h1>Scenario Quiz</h1></header>

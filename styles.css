@@ -303,7 +303,7 @@ input[type="text"] {
 
 .tip-button {
   width: 100%;
-  background-color: #f3f7fa;
+  background: #f3f7fa;
   border: none;
   border-radius: 0.75rem; /* 12px */
   padding: 1em;
@@ -330,7 +330,7 @@ input[type="text"] {
   background-color: #e4ecff;
   padding: 1em 1.25em;
   border-radius: 0.75rem; /* 12px */
-  box-shadow: inset 0 0 0.5rem rgba(42, 71, 135, 0.2); /* 8px in rem */
+  box-shadow: inset 0 0 0.5rem rgba(42, 71, 135, 0.2); 
   font-size: calc(1rem * var(--font-scale));
   margin-bottom: 0;
   padding-bottom: 1em;
