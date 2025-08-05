@@ -40,6 +40,11 @@ main {
   padding: 1rem;
 }
 
+main, #content, .card, .tips-container {
+  padding-bottom: 4rem; /* or adjust if your tab bar height differs */
+}
+
+
 /* Card Style */
 .card {
   background: white;
@@ -170,6 +175,48 @@ input[type="text"] {
   border-radius: 8px;
 }
 
+/* Quiz Navigation Buttons */
+
+.arrow-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+.card button.arrow-btn {
+  width: auto !important;         
+  background: none !important;        
+  font-size: 2.5rem;       /* Bigger arrow */
+  font-weight: bold;                   
+}
+
+.arrow-btn {
+  font-size: 1.5rem;
+  min-width: 2.5em;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+  background-color: transparent;
+}
+
+.prev-arrow {
+  color: #d32f2f;     
+}
+
+.next-arrow {
+  color: #388e3c;     
+}
+
+.arrow-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 /* Tab Bar */
 .tab-bar {
   display: flex;
@@ -274,18 +321,6 @@ input[type="text"] {
   line-height: 1.4;
 }
 
-/* .tip-example {
-  background: #d0eaff;
-  border-left: 0.3125rem solid #1e61a3; 
-  padding: 1rem 1.25rem; 
-  margin: 2rem auto 0 auto; 
-  max-width: 40rem; 
-  border-radius: 0.5rem; 
-  box-shadow: 0 0.125rem 0.625rem rgba(30, 97, 163, 0.15);
-  font-size: calc(1.1rem * var(--font-scale));
-  font-style: italic;
-  color: #003366;
-} */
 
 
 

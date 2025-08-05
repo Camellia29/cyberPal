@@ -56,7 +56,7 @@ function loadView(view) {
       </header>
       ${hCard("🔠", "Font Size", "Increase font size to your liking", "loadView('fontSize')", "#dcd4f7")}
       ${hCard("🧠", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#ffe0c7")}
-      ${hCard("💬", "General Advice", "Learn online safety steps", "loadView('advice')", "#c7f0ff")}
+      ${hCard("🗣️", "General Advice", "Learn online safety steps", "loadView('advice')", "#c7f0ff")}
       ${hCard("📞", "Trusted Contact", "Add someone you trust to call in urgent situations", "loadView('contact')", "#d4f7ec")}
       ${hCard("💡", "Daily Tips", "Read today's tip", "loadView('reminder')", "#e0e0f0")}
     `;
@@ -226,15 +226,18 @@ let isSpeakingScenario = false;
 function speakCurrentScenario() {
   if (speechSynthesis.speaking) {
     speechSynthesis.cancel();
-    isSpeakingScenario = false;
     return;
   }
-  const question = document.querySelector('.quiz-question');
-  if (question) {
-    const utter = new SpeechSynthesisUtterance(question.textContent);
+  const scenario = quizScenarios[currentScenarioIndex];
+  if (scenario) {
+    // Combine question and options for a full read-out
+    let utteranceText = scenario.question.replace(/<[^>]+>/g, ""); // Strip HTML
+    scenario.options.forEach((opt, idx) => {
+      const letter = String.fromCharCode(65 + idx); // A, B, C, ...
+      utteranceText += ` Option ${letter}: ${opt.text}.`;
+    });
+    const utter = new SpeechSynthesisUtterance(utteranceText);
     utter.lang = 'en-UK';
-    utter.onstart = () => { isSpeakingScenario = true; };
-    utter.onend = () => { isSpeakingScenario = false; };
     speechSynthesis.speak(utter);
   }
 }
@@ -264,25 +267,35 @@ function renderQuizScenario(index) {
       `).join('')}
       <br><button class="speak-btn" onclick="speakCurrentScenario()">🔊 Read Aloud</button>
       <div id="quiz-feedback" style="margin-top:1em;"></div>
-      <div style="margin-top:1em;">
-        <button onclick="prevScenario()" ${index <= 0 ? "disabled" : ""}>Previous</button>
-        <button onclick="nextScenario()" ${index >= quizScenarios.length - 1 ? "disabled" : ""}>Next</button>
-      </div>
+        <div style="margin-top:1em; text-align: center;", class="arrow-nav">
+        <button class="arrow-btn prev-arrow" onclick="prevScenario()" ${index <= 0 ? "disabled" : ""}>&#8592;</button>
+        <button class="arrow-btn next-arrow" onclick="nextScenario()" ${index >= quizScenarios.length - 1 ? "disabled" : ""}>&#8594;</button>
+        </div>
     </div>`;
 }
+
 
 function handleAnswer(scenarioIndex, optionIndex) {
   const scenario = quizScenarios[scenarioIndex];
   const option = scenario.options[optionIndex];
   const feedbackEl = document.getElementById('quiz-feedback');
+  let feedbackText;
 
   if (option.correct) {
-    feedbackEl.innerHTML = `
-      ✅ Great job! That was the safe choice.<br><em>${scenario.explanation}</em>`;
+    feedbackText = `✅ Great job! That was the safe choice. ${scenario.explanation}`;
   } else {
-    feedbackEl.innerHTML = `
-      ⚠️ That could be risky. Here's why:<br><em>${scenario.explanation}</em>`;
+    feedbackText = `⚠️ That could be risky. Here's why: ${scenario.explanation}`;
   }
+  feedbackEl.innerHTML = feedbackText;
+
+   // Scroll feedback into view
+  feedbackEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // Read out the feedback (after ensuring any previous synth is canceled)
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(feedbackText.replace(/<[^>]+>/g, ""));
+  utter.lang = 'en-UK';
+  speechSynthesis.speak(utter);
 }
 
 function prevScenario() {
