@@ -35,6 +35,21 @@ header h2 {
   color: black;
 }
 
+/* Back Button */
+#back-btn {      
+  position: fixed; 
+  top: 1rem; 
+  left: 1rem; 
+  z-index: 1001; 
+  font-size: 1.25rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  border: none;
+  background:#a1c4fd;
+  color: black !important;
+  cursor: pointer;
+}
+
 /* Main Content */
 main {
   padding: 1rem;
@@ -75,6 +90,7 @@ main, #content, .card, .tips-container {
   min-width: 110px;
   min-height: 44px;
   cursor: pointer;
+  color: black !important;
 }
 
 .card button {
@@ -188,7 +204,7 @@ input[type="text"] {
 .card button.arrow-btn {
   width: auto !important;         
   background: none !important;        
-  font-size: 2.5rem;       /* Bigger arrow */
+  font-size: 2.5rem;       
   font-weight: bold;                   
 }
 

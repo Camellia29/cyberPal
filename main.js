@@ -17,7 +17,7 @@ const quizScenarios = [
     { text: "It's a scam", correct: true },
     { text: "It's a genuine message", correct: false }
   ],
-  explanation: "Always check the sender's address and never click on links in suspicious emails. Plus, it is requesting an urgent."
+  explanation: "This message is a scam. Genuine companies like Amazon never ask you to verify your account this way. Don't click the link or enter any information. Delete the email and, if in doubt, always access your account by going directly to amazon.co.uk (or .com) in your browser."
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ function loadView(view) {
     renderQuizScenario(currentScenarioIndex);
 
   } else if (view === 'advice') {
-    content.innerHTML = `
+    content.innerHTML = getBackButtonHtml() + `
       <header>
       <h1>Safety Tips</h1>
       </header>
@@ -107,7 +107,7 @@ function loadView(view) {
         </div>`;
         bindTipButtons();
   } else if (view === 'reminder') {
-    content.innerHTML = `
+    content.innerHTML = getBackButtonHtml() +`
       <header>
       <h1>Today's Tip</h1>
       </header>
@@ -116,7 +116,7 @@ function loadView(view) {
         <button class="speak-btn" onclick="speakText(this)">🔊 Read Aloud</button>
       </div>`;
   } else if (view === 'fontSize') {
-    content.innerHTML = `
+    content.innerHTML = getBackButtonHtml() + `
       <header>
       <h1>Settings</h1>
       </header>
@@ -130,7 +130,7 @@ function loadView(view) {
       </div>`;
   } else if (view === 'contact') {
     const stored = JSON.parse(localStorage.getItem('trustedContact') || '{}');
-    content.innerHTML = `
+    content.innerHTML = getBackButtonHtml() + `
       <header>
       <h1>Trusted Contact</h1>
       </header>
@@ -144,6 +144,14 @@ function loadView(view) {
         <p id="savedMsg"></p>
       </div>`;
   }
+}
+
+function getBackButtonHtml() {
+  return `
+  <button id="back-btn" onclick="loadView('home')" 
+    aria-label="Go back to home">
+    ←
+  </button>`;
 }
 
 function hCard(icon, title, desc, action, bg) {
@@ -247,18 +255,14 @@ function speakCurrentScenario() {
 function renderQuizScenario(index) {
   const content = document.getElementById('content');
   const scenario = quizScenarios[index];
-  
   if (!scenario) {
-    content.innerHTML = `
-      <header><h1>Scenario Quiz Completed</h1></header>
-      <div class="card">
-        <p>Great job completing the quiz!</p>
-        <button onclick="loadView('home')">Return Home</button>
-      </div>`;
+    content.innerHTML = getBackButtonHtml() + `
+    <p>No scenario found.</p>`;
     return;
   }
+  
 
-  content.innerHTML = `
+  content.innerHTML = getBackButtonHtml() + `
     <header><h1>Scenario Quiz</h1></header>
     <div class="card">
       <p class="quiz-question">${scenario.question}</p>
