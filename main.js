@@ -67,7 +67,7 @@ function loadView(view) {
   } else if (view === 'advice') {
     content.innerHTML = getBackButtonHtml() + `
       <header>
-      <h1>Safety Tips</h1>
+      <h1>Security Tips</h1>
       </header>
         <div class="tips-container">
           <button class="tip-button" aria-expanded="false" aria-controls="tip1-body" id="tip1-btn">
@@ -108,13 +108,14 @@ function loadView(view) {
         bindTipButtons();
   } else if (view === 'reminder') {
     content.innerHTML = getBackButtonHtml() +`
-      <header>
+    <header>
       <h1>Today's Tip</h1>
-      </header>
-      <div class="card">
-        <p>💡</p><p> Don't click on links from unknown emails.</p> 
-        <button class="speak-btn" onclick="speakText(this)">🔊 Read Aloud</button>
-      </div>`;
+    </header>
+    <div class="card">
+      <p>💡</p><p>${getDailyTip()}</p>
+      <button class="speak-btn" onclick="speakText(this)">🔊 Read Aloud</button>
+    </div>
+  `;
   } else if (view === 'fontSize') {
     content.innerHTML = getBackButtonHtml() + `
       <header>
@@ -130,20 +131,31 @@ function loadView(view) {
       </div>`;
   } else if (view === 'contact') {
     const stored = JSON.parse(localStorage.getItem('trustedContact') || '{}');
+
+    let savedContactHTML = '';
+    if (stored.name && stored.phone) {
+      savedContactHTML = `
+        <div style="background:#e8f5e9; padding:0.75em; border-radius:8px; margin-bottom:1em;">
+          <strong>Saved Contact:</strong><br>
+          ${stored.name} : ${stored.phone}
+        </div>`;
+    }
+
     content.innerHTML = getBackButtonHtml() + `
       <header>
       <h1>Trusted Contact</h1>
       </header>
       <div class="card">
+        ${savedContactHTML}
         <p>Enter your trusted contact details below:</p>
         <label>Name:</label>
-        <input type="text" id="trustedName" value="${stored.name || ''}" placeholder="e.g., Jane Doe">
+        <input type="text" id="trustedName" value="${''}" placeholder="e.g., Jane Doe">
         <label>Phone:</label>
-        <input type="text" id="trustedPhone" value="${stored.phone || ''}" placeholder="e.g., 555-123-4567">
+        <input type="text" id="trustedPhone" value="${''}" placeholder="e.g., +44 808 157 0192">
         <button onclick="saveTrustedContact()">Save</button>
-        <p id="savedMsg"></p>
+        <p id="savedMsg" style="margin-top:0.75em;"></p>
       </div>`;
-  }
+    }
 }
 
 function getBackButtonHtml() {
@@ -181,23 +193,53 @@ function feedback(correct) {
   }
 }
 
+const dailyTips = [
+  "Don't click on links from unknown emails.",
+  "Always check the sender's address before acting.",
+  "Banks will never ask for your PIN by email or phone.",
+  "If something feels urgent or off, take a moment to pause.",
+  "Use a separate email for signing up to new services.",
+  "Never share personal details unless you're sure who's asking."
+];
 
-function askFriend() {
-  const q = document.getElementById("question").value.toLowerCase();
-  const a = document.getElementById("answer");
-  if (q.includes("phishing")) {
-    a.textContent = "Phishing is a trick to steal your info. Don't click unknown links.";
-  } else {
-    a.textContent = "Good question! Always ask someone you trust if unsure.";
-  }
+function getDailyTip() {
+  // Use date to select tip of the day (rotates by day)
+  const today = new Date();
+  const tipIndex = today.getDate() % dailyTips.length; // Simple rotation
+  return dailyTips[tipIndex];
 }
 
 function saveTrustedContact() {
-  const name = document.getElementById("trustedName").value;
-  const phone = document.getElementById("trustedPhone").value;
+  const nameEl = document.getElementById("trustedName");
+  const phoneEl = document.getElementById("trustedPhone");
+  const msgEl = document.getElementById("savedMsg");
+
+  const name = nameEl.value.trim();
+  const phone = phoneEl.value.trim();
+
+  const phonePattern = /^(?:0|\+?44)(?:\d\s?){9,10}$/;
+
+  msgEl.style.color = "red";
+
+  if (!name) {
+    msgEl.textContent = "❌ Please enter a name.";
+    return;
+  }
+  if (!phone) {
+    msgEl.textContent = "❌ Please enter a phone number.";
+    return;
+  }
+  if (!phonePattern.test(phone)) {
+    msgEl.textContent = "❌ Please enter a Uk phone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192.";
+    return;
+  }
+
+  // If all checks pass — save and confirm
   localStorage.setItem("trustedContact", JSON.stringify({ name, phone }));
-  document.getElementById("savedMsg").textContent = "✅ Saved successfully!";
+  msgEl.style.color = "green";
+  msgEl.textContent = "✅ Trusted contact saved successfully!";
 }
+
 
 function setActiveTab(button) {
   document.querySelectorAll('.tab-bar button').forEach(btn => btn.classList.remove('active'));
