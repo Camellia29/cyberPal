@@ -376,10 +376,25 @@ function bindTipButtons() {
       if (!expanded) {
         button.setAttribute('aria-expanded', 'true');
         const tipBody = document.getElementById(button.getAttribute('aria-controls'));
-        if (tipBody) tipBody.hidden = false;
+        if (tipBody) {
+          tipBody.hidden = false;
+
+          // 🗣 Speak the title + body content
+          speechSynthesis.cancel(); // stop any ongoing speech
+          const titleText = button.innerText.replace('›', '').trim(); // button label without arrow
+          const bodyText = tipBody.innerText.trim();
+          const utterText = `${titleText}. ${bodyText}`;
+          const utter = new SpeechSynthesisUtterance(utterText);
+          utter.lang = 'en-UK';
+          speechSynthesis.speak(utter);
+        }
+      } else {
+        // If closing the same tip, stop speech
+        speechSynthesis.cancel();
       }
     });
   });
 }
+
 
 
