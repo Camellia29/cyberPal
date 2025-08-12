@@ -54,11 +54,11 @@ function loadView(view) {
       <h1>Welcome back!</h1>
       <h2>How can I assist you today?</h2>
       </header>
-      ${hCard("🔠", "Font Size", "Increase font size to your liking", "loadView('fontSize')", "#dcd4f7")}
-      ${hCard("🧠", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#ffe0c7")}
-      ${hCard("🗣️", "General Advice", "Learn online safety steps", "loadView('advice')", "#c7f0ff")}
-      ${hCard("📞", "Trusted Contact", "Add someone you trust to call in urgent situations", "loadView('contact')", "#d4f7ec")}
-      ${hCard("💡", "Daily Tips", "Read today's tip", "loadView('reminder')", "#e0e0f0")}
+      ${hCard("<big>🔠</big>", "Font Size", "Increase font size to your liking", "loadView('fontSize')", "#dcd4f7")}
+      ${hCard("<big>🧠</big>", "Scenario Quiz", "Answer questions about internet safety", "loadView('quiz')", "#ffe0c7")}
+      ${hCard("<big>🗣️</big>", "General Advice", "Learn online safety steps", "loadView('advice')", "#c7f0ff")}
+      ${hCard("<big>📞</big>", "Trusted Contact", "Add someone you trust to call in case of emergency", "loadView('contact')", "#d4f7ec")}
+      ${hCard("<big>💡</big>", "Daily Tips", "Read today's tip", "loadView('reminder')", "#e0e0f0")}
     `;
   } else if (view === 'quiz') {
 
@@ -67,7 +67,7 @@ function loadView(view) {
   } else if (view === 'advice') {
     content.innerHTML = getBackButtonHtml() + `
       <header>
-      <h1>Security Tips</h1>
+      <h1>🗣️ Security Tips</h1>
       </header>
         <div class="tips-container">
           <button class="tip-button" aria-expanded="false" aria-controls="tip1-body" id="tip1-btn">
@@ -109,10 +109,10 @@ function loadView(view) {
   } else if (view === 'reminder') {
     content.innerHTML = getBackButtonHtml() +`
     <header>
-      <h1>Today's Tip</h1>
+      <h1>💡 Today's Tip</h1>
     </header>
     <div class="card">
-      <p>💡</p><p>${getDailyTip()}</p>
+      <p><big>☞</big> ${getDailyTip()}</p>
       <button class="speak-btn" onclick="speakText(this)">🔊 Read Aloud</button>
     </div>
   `;
@@ -143,7 +143,7 @@ function loadView(view) {
 
     content.innerHTML = getBackButtonHtml() + `
       <header>
-      <h1>Trusted Contact</h1>
+      <h1>📞 Trusted Contact</h1>
       </header>
       <div class="card">
         ${savedContactHTML}
@@ -304,7 +304,7 @@ function renderQuizScenario(index) {
   }
 
   content.innerHTML = getBackButtonHtml() + `
-    <header><h1>Scenario Quiz</h1></header>
+    <header><h1>🧠 Scenario Quiz</h1></header>
     <div class="card">
       <p class="quiz-question">${scenario.question}</p>
       ${scenario.options.map((opt, i) => `
