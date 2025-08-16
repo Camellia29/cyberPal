@@ -136,11 +136,16 @@ function loadView(view) {
 
     let savedContactHTML = '';
     if (stored.name && stored.phone) {
+      const cleanedPhone = stored.phone.replace(/[^+\d]/g, "");
       savedContactHTML = `
         <div style="background:#e8f5e9; padding:0.75em; border-radius:8px; margin-bottom:1em;">
           <strong>Saved Contact:</strong><br>
-          ${stored.name} : ${stored.phone}
-        </div>`;
+          ${stored.name} :
+          <a href="tel:${cleanedPhone}" style="color:#2196f3; text-decoration:underline;">
+            ${stored.phone}
+          </a>
+        </div>
+      `;
     }
 
     content.innerHTML = getBackButtonHtml() + `
