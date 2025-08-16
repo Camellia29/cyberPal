@@ -43,7 +43,9 @@ const quizScenarios = [
 
 let currentScenarioIndex = 0;
 
-
+/**
+ * Loads a view into the #content container.
+ */
 function loadView(view) {
   speechSynthesis.cancel(); // Stop any speech when changing views
   const content = document.getElementById('content');
@@ -158,6 +160,10 @@ function loadView(view) {
     }
 }
 
+
+/**
+ * Returns HTML for a back button.
+ */
 function getBackButtonHtml() {
   return `
   <button id="back-btn" onclick="loadView('home')" 
@@ -166,6 +172,9 @@ function getBackButtonHtml() {
   </button>`;
 }
 
+/** 
+ * Returns HTML for a horizontal card with an icon, title, description, action, and background color.
+ */
 function hCard(icon, title, desc, action, bg) {
   return `
     <div class="hCard" style="background:${bg}">
@@ -179,6 +188,9 @@ function hCard(icon, title, desc, action, bg) {
     </div>`;
 }
 
+/** 
+ *  Display feedback based on quiz answer correctness.
+ */
 function feedback(correct) {
   const feedbackEl = document.getElementById("quiz-feedback");
   if (correct) {
@@ -202,13 +214,20 @@ const dailyTips = [
   "Never share personal details unless you're sure who's asking."
 ];
 
+/**
+ * Returns the tip of the day based on the current date.
+ */
 function getDailyTip() {
-  // Use date to select tip of the day (rotates by day)
   const today = new Date();
-  const tipIndex = today.getDate() % dailyTips.length; // Simple rotation
+  const tipIndex = today.getDate() % dailyTips.length;
   return dailyTips[tipIndex];
 }
 
+/**
+ * Saves the trusted contact details from input fields.
+ * Validates the input and stores it in localStorage.
+ * Displays a success or error message based on validation.
+ */
 function saveTrustedContact() {
   const nameEl = document.getElementById("trustedName");
   const phoneEl = document.getElementById("trustedPhone");
@@ -217,6 +236,10 @@ function saveTrustedContact() {
   const name = nameEl.value.trim();
   const phone = phoneEl.value.trim();
 
+  // UK phone number validation pattern
+  // Allows formats like 01632 960 001, 07700 900 982, +44 808 157 0192
+  // Matches UK landline and mobile numbers, including optional +44 prefix
+  // Allows spaces or no spaces between digits
   const phonePattern = /^(?:0|\+?44)(?:\d\s?){9,10}$/;
 
   msgEl.style.color = "red";
@@ -234,20 +257,26 @@ function saveTrustedContact() {
     return;
   }
 
-  // If all checks pass — save and confirm
+  // If all checks pass: save and confirm
   localStorage.setItem("trustedContact", JSON.stringify({ name, phone }));
   msgEl.style.color = "green";
   msgEl.textContent = "✅ Trusted contact saved successfully!";
 }
 
-
+/**
+ * Sets the active tab in the tab bar. 
+ */
 function setActiveTab(button) {
   document.querySelectorAll('.tab-bar button').forEach(btn => btn.classList.remove('active'));
   button.classList.add('active');
 }
 
+// Initialize the app by loading the home view
 window.onload = () => loadView('home');
 
+/**
+ * Adjusts the font size by adding a class to the document element.
+ */
 function setFontSize(className) {
   document.documentElement.classList.remove('font-small', 'font-medium', 'font-large');
   document.documentElement.classList.add(className);
@@ -255,6 +284,10 @@ function setFontSize(className) {
 
 let currentUtterance = null;
 
+/**
+ * Speaks the text of the button's previous sibling element.
+ * If already speaking, it stops and resets the utterance.
+ */
 function speakText(button) {
   if (currentUtterance) {
     speechSynthesis.cancel();
@@ -268,9 +301,9 @@ function speakText(button) {
   speechSynthesis.speak(currentUtterance);
 }
 
-// Add a button to read the current scenario aloud
-// This will be used in the quiz view to read the question aloud
-
+/**
+ * Reads aloud the current quiz scenario question and options.
+ */
 let isSpeakingScenario = false;
 
 function speakCurrentScenario() {
@@ -292,7 +325,9 @@ function speakCurrentScenario() {
   }
 }
 
-// Quiz scenarios functions
+/** 
+ * Renders the quiz scenario based on the current index.
+ */
 
 function renderQuizScenario(index) {
   const content = document.getElementById('content');
@@ -319,7 +354,9 @@ function renderQuizScenario(index) {
     </div>`;
 }
 
-
+/**
+ * Handles answer selection and provides feedback.
+ */
 function handleAnswer(scenarioIndex, optionIndex) {
   const scenario = quizScenarios[scenarioIndex];
   const option = scenario.options[optionIndex];
@@ -343,6 +380,9 @@ function handleAnswer(scenarioIndex, optionIndex) {
   speechSynthesis.speak(utter);
 }
 
+/** 
+ * Shows the previous or next quiz scenario.
+ */
 function prevScenario() {
   if (currentScenarioIndex > 0) {
     currentScenarioIndex--;
@@ -357,7 +397,9 @@ function nextScenario() {
   }
 }
 
-// Recipe card functions
+/**
+ * Binds click events to tip buttons to toggle visibility and speech.
+ */
 function bindTipButtons() {
   const buttons = document.querySelectorAll('.tip-button');
 
@@ -379,7 +421,7 @@ function bindTipButtons() {
         if (tipBody) {
           tipBody.hidden = false;
 
-          // 🗣 Speak the title + body content
+          // Speak the title + body content
           speechSynthesis.cancel(); // stop any ongoing speech
           const titleText = button.innerText.replace('›', '').trim(); // button label without arrow
           const bodyText = tipBody.innerText.trim();
