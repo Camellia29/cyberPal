@@ -36,18 +36,35 @@ header h2 {
 }
 
 /* Back Button */
-#back-btn {      
-  position: fixed; 
-  top: 1rem; 
-  left: 1rem; 
-  z-index: 1001; 
-  font-size: 1.25rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
+#back-btn {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 64px;
+  height: 64px;
   border: none;
-  background:#a1c4fd;
-  color: black !important;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 100% 100%;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background: #a1c4fd;
+  color: #222;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(0, 0);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 1001;
   cursor: pointer;
+  transition: background 0.2s;
+  padding-right: 8px;
+  padding-bottom: 8px;
+}
+
+#back-btn:hover,
+#back-btn:focus {
+  background: #7eb9fa;
 }
 
 /* Main Content */
